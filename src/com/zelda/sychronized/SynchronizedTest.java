@@ -13,6 +13,7 @@ package com.zelda.sychronized;
         Thread t2 = new Thread(r);
         t1.setName("name1 ");
         t2.setName("name2 ");
+
         t1.start();t2.start();
     }
 
