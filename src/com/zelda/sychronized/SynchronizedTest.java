@@ -23,9 +23,12 @@ package com.zelda.sychronized;
         public  void run() {
             while (num > 0) {
                 try {
-                    num -- ;
-                    Thread.sleep(100);
-                    System.out.println(Thread.currentThread().getName()+num);
+                    synchronized(this) {
+                        num -- ;
+                        Thread.sleep(100);
+                        System.out.println(Thread.currentThread().getName()+num);
+                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
