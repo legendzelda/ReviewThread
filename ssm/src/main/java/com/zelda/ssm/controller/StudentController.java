@@ -42,7 +42,7 @@ public class StudentController {
             student.setId(1);
             student.setGender(1);
             student.setAddress("北京七里省际大厦3栋4402");
-            student.setName("江泽");
+            student.setName("江泽民");
         }
         logger.info(student.toString());
         model.addAttribute("student", student);
