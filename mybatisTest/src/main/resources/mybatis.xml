@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTDConfig3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+        <settings>
+                <setting name="cacheEnabled" value="false"/>
+                <setting name="useGeneratedKeys" value="true"/>
+                <setting name="defaultExecutorType" value="REUSE" />
+        </settings>
+        <typeAliases>
+                <typeAlias  alias="User" type="com.zelda.pojo.User"></typeAlias>
+        </typeAliases>
+        
+        <environments default="development">
+                <environment id="development">
+                        <transactionManager type="jdbc"></transactionManager>
+                        <dataSource type="POOLED">
+                                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_test"/>
+                                <property name="username" value="root"/>
+                                <property name="password" value="root" />
+                        </dataSource>
+                </environment>
+        </environments>
+
+        <mappers>
+                <mapper resource="mappers/UserMapper.xml"></mapper>
+
+        </mappers>
+</configuration>
