@@ -11,7 +11,7 @@
         <result column="address" property="address" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List">
-        id,stu_name,age,gender,address
+        id,sname,age,gender,address
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
@@ -27,7 +27,7 @@
     </delete>
     <insert id="insert" parameterType="com.zelda.ssm.pojo.Student">
         insert into
-        student(id,stu_name,age,gender,address)
+        student(id,sname,age,gender,address)
         values
         (#{id,jdbcType=INTEGER},#{stu_name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{gender,jdbcType=INTEGER},#{address,jdbcType=VARCHAR})
     </insert>
@@ -88,7 +88,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.zelda.ssm.pojo.Student">
         update student
-        set stu_name = #{stu_name,jdbcType=VARCHAR},
+        set sname = #{stu_name,jdbcType=VARCHAR},
         age = #{age,jdbcType=INTEGER},
         gender = #{gender,jdbcType=INTEGER},
         address = #{address,jdbcType=VARCHAR}

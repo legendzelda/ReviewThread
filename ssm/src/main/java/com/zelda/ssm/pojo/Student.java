@@ -4,6 +4,8 @@ import com.zelda.ssm.controller.StudentController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 /**
  * @author bu.han
  */
@@ -20,6 +22,10 @@ public class Student {
     private String address;
 
     private int gender;
+
+    private Double salary;
+
+    private Date birthday;
 
     public Integer getId() {
         return id;
@@ -59,6 +65,22 @@ public class Student {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     @Override
