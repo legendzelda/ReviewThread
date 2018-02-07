@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 返回List<map>-->
+<mapper namespace="com.zelda.ssm.dao.IDeptDao">
+    <select id="getDeptById"  resultType="com.zelda.ssm.pojo.Dept" parameterType="java.lang.Integer" >
+                  SELECT d.*,e.* FROM dept d LEFT JOIN  emp e ON d.deptno = e.deptno  WHERE  d.deptno = #{id, jdbcType= INTEGER}
+    </select>
+
+    <!-- 嵌套查询 : 多次查询-->
+    <!-- 嵌套 结果: 一次查询,再嵌套map-->
+</mapper>
