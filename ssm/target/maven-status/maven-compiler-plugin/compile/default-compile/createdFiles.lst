@@ -1,5 +1,0 @@
-com\zelda\ssm\service\impl\StudentServiceImpl.class
-com\zelda\ssm\pojo\Student.class
-com\zelda\ssm\controller\StudentController.class
-com\zelda\ssm\service\IStudentService.class
-com\zelda\ssm\dao\IStudentDao.class
