@@ -4,7 +4,6 @@
 *.class
 
 # Log file
-*.log
 target
 
 # BlueJ files
@@ -14,6 +13,7 @@ target
 .mtj.tmp/
 
 # Package Files #
+*.log
 *.jar
 *.war
 *.ear
