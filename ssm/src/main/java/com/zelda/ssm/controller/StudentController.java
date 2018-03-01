@@ -83,6 +83,9 @@ public class StudentController {
         }
         FileUtils.copyInputStreamToFile(file.getInputStream(), new File("F:\\",
                 System.currentTimeMillis() + file.getOriginalFilename()));
+
         return "sucess";
     }
+
+
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zelda.ssm.dao.IEmpDao">
+
+    <sql id="maxSalaryColumns">
+        empno,ename,sal,deptno
+    </sql>
+
+    <!-- 返回一个 Map -->
+    <select id="getMaxSalEmp" resultType="hashmap">
+        SELECT <include refid="maxSalaryColumns"/> FROM emp WHERE sal = (SELECT  max(sal) FROM  emp)
+    </select>
+
+    <!-- 如何返回Emp类型-->
+    <select id="queryEmpEntity"  resultType="com.zelda.ssm.pojo.Emp" >
+                SELECT  empno ,ename AS  empName,sal AS salary,deptno FROM emp WHERE sal =(SELECT  max(sal) FROM emp)
+
+    </select>
+
+    <!-- 返回任意一个pojo-->
+    <select id="queryEmpForStu" resultType="com.zelda.ssm.pojo.Student">
+
+        SELECT  empno as id ,ename AS  name FROM emp WHERE sal =(SELECT  max(sal) FROM emp)
+
+    </select>
+
+    <!-- 这里跟 hibernate 有很大不同-->
+    <select id="queryAssociationForEmp" resultMap="maxSalResult" parameterType="java.lang.Integer">
+            SELECT e1.*,e2.empno as m_empno,e2.ename as m_ename,e2.job AS m_job,e2.mgr as m_mgr,e2.hiredate AS  m_hiredate,
+                e2.sal as m_sal,e2.comm AS  m_comm,e2.deptno AS  m_deptno
+            FROM emp e1 LEFT JOIN emp e2 ON e1.mgr=e2.empno WHERE e1.empno = #{empid,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="maxSalResult" type="com.zelda.ssm.pojo.Emp">
+            <id property="empNo" column="empno"/>
+            <result property="empName" column="ename"/>
+            <result property="job" column="job"/>
+            <result property="hiredate" column="hiredate" />
+            <result property="salary" column="sal"/>
+            <result property="commission" column="comm"/>
+
+            <association property="managerInfo"  resultMap="managerResult">
+                <!--<id property="empNo" column="mgr"/>
+                <result property="empName" column="ename"/>
+                <result property="job" column="job"/>
+                <result property="hiredate" column="hiredate" />
+                <result property="salary" column="sal"/>
+                <result property="commission" column="comm"/>
+                <association property="manager" javaType="com.zelda.ssm.pojo.Emp">
+                    <id property="empNo" column="mgr"/>
+                </association>-->
+            </association>
+    </resultMap>
+
+    <!-- 注意映射的跟 hibernate的不同点,mybatis相当于拿到结果集去映射,sql语句这个可以总结为面试问题
+    第二个不同,mybatis是可以没有getter setter方法的-->
+    <resultMap id="managerResult" type="com.zelda.ssm.pojo.Emp">
+            <id property="empNo" column="mgr"/>
+           <result property="empName" column="m_ename"/>
+           <result property="job" column="m_job"/>
+            <result property="hiredate" column="m_hiredate" />
+            <result property="salary" column="m_sal"/>
+            <result property="commission" column="m_comm"/>
+    </resultMap>
+
+
+</mapper>

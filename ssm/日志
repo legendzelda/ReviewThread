@@ -1,0 +1,4 @@
+修改表字符集 ：
+alter table address convert to character set utf8 转换需要插入汉字的数据表编码为utf8即可（此例中的数据表是address）:
+
+show variables like 'character%'

@@ -5,31 +5,31 @@
 <mapper namespace="com.zelda.ssm.dao.IStudentDao">
     <resultMap type="com.zelda.ssm.pojo.Student" id="BaseResultMap">
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="stu_name" property="name" jdbcType="VARCHAR" />
+        <result column="sname" property="name" jdbcType="VARCHAR" />
         <result column="age" property="age" jdbcType="INTEGER" />
         <result column="gender" property="gender" jdbcType="INTEGER" />
         <result column="address" property="address" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List">
-        id,stu_name,age,gender,address
+        id,sname,age,gender,address
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
             parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"></include>
         from student
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{sid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from
         student
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.zelda.ssm.pojo.Student">
+    <insert id="insert" useGeneratedKeys="true" parameterType="com.zelda.ssm.pojo.Student">
         insert into
-        student(id,stu_name,age,gender,address)
+        student(sname,age,gender,address)
         values
-        (#{id,jdbcType=INTEGER},#{stu_name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{gender,jdbcType=INTEGER},#{address,jdbcType=VARCHAR})
+        (#{sname,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{gender,jdbcType=INTEGER},#{address,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.zelda.ssm.pojo.Student">
         insert into student
@@ -37,8 +37,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="stu_name != null">
-                stu_name,
+            <if test="sname != null">
+                sname,
             </if>
             <if test="age != null">
                 age,
@@ -54,8 +54,8 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="stu_name != null">
-                #{stu_name,jdbcType=VARCHAR},
+            <if test="sname != null">
+                #{sname,jdbcType=VARCHAR},
             </if>
             <if test="age != null">
                 #{age,jdbcType=INTEGER},
@@ -71,8 +71,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.zelda.ssm.pojo.Student">
         update student
         <set >
-            <if test="stu_name != null">
-                stu_name = #{stu_name,jdbcType=VARCHAR},
+            <if test="sname != null">
+                sname = #{sname,jdbcType=VARCHAR},
             </if>
             <if test="age != null">
                 age = #{age,jdbcType=INTEGER},
@@ -88,7 +88,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.zelda.ssm.pojo.Student">
         update student
-        set stu_name = #{stu_name,jdbcType=VARCHAR},
+        set sname = #{sname,jdbcType=VARCHAR},
         age = #{age,jdbcType=INTEGER},
         gender = #{gender,jdbcType=INTEGER},
         address = #{address,jdbcType=VARCHAR}
