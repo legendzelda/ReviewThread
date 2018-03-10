@@ -1,12 +1,9 @@
 package com.zelda.ssm.dao;
 
-import com.zelda.ssm.pojo.Dept;
-
-import java.util.List;
 import java.util.Map;
 
-public interface IDeptDao {
+public interface IUserDao {
 
-        List<Dept> getDeptById(Integer deptId);
+        public void getUserCount(Map<String,Object> param);
 
 }

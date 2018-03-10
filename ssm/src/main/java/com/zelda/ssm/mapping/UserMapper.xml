@@ -2,12 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 返回List<map>-->
-<mapper namespace="com.zelda.ssm.dao.IDeptDao">
-    <select id="getDeptById"  resultType="com.zelda.ssm.pojo.Dept" parameterType="java.lang.Integer" >
-                  SELECT d.*,e.* FROM dept d LEFT JOIN  emp e ON d.deptno = e.deptno  WHERE  d.deptno = #{id, jdbcType= INTEGER}
+
+<!--调用存储过程-->
+<mapper namespace="com.zelda.ssm.dao.IUserDao">
+
+    <!--
+        查询得到男性或女性的数量, 如果传入的是0就女性否则是男性
+     -->
+    <select id="getUserCount" parameterMap="getUserCountMap" statementType="CALLABLE">
+        CALL ges_user_count(?,?)
     </select>
 
-    <!-- 嵌套查询 : 多次查询-->
-    <!-- 嵌套 结果: 一次查询,再嵌套map-->
+
+    <parameterMap type="java.util.Map" id="getUserCountMap">
+        <parameter property="sexid" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="usercount" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+
+
+
 </mapper>

@@ -2,9 +2,11 @@ package com.zelda.ssm.controller;
 
 import com.zelda.ssm.pojo.Student;
 import com.zelda.ssm.service.IStudentService;
+import com.zelda.ssm.utils.RedisCacheUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -30,6 +33,9 @@ public class StudentController {
 
     @Resource
     private IStudentService studentService;
+    
+    @Autowired
+    private RedisCacheUtil<Object> redisCache;
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String test(HttpServletRequest request, ModelAndView modelAndView, Model model) {
@@ -86,6 +92,16 @@ public class StudentController {
 
         return "sucess";
     }
-
-
+    
+    @RequestMapping("/testRedis")
+    public ModelAndView testGetCacheFromRedis(HttpServletRequest req, HttpServletResponse rsp) {
+    
+        ModelAndView mav = new ModelAndView("index");
+        //redisCache.getCacheIntegerMap("voteProjectMap");
+        redisCache.setCacheObject("testRedis","hello_world");
+        String hello_world = redisCache.getCacheObject("testRedis");
+        System.out.println(hello_world);
+        return mav;
+    }
+    
 }

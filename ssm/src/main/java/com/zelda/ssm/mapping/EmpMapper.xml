@@ -58,8 +58,8 @@
     第二个不同,mybatis是可以没有getter setter方法的-->
     <resultMap id="managerResult" type="com.zelda.ssm.pojo.Emp">
             <id property="empNo" column="mgr"/>
-           <result property="empName" column="m_ename"/>
-           <result property="job" column="m_job"/>
+            <result property="empName" column="m_ename"/>
+            <result property="job" column="m_job"/>
             <result property="hiredate" column="m_hiredate" />
             <result property="salary" column="m_sal"/>
             <result property="commission" column="m_comm"/>
