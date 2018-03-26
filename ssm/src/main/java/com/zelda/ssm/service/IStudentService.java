@@ -8,5 +8,5 @@ public interface IStudentService {
      * @param studentId
      * @return Student
      */
-    public Student getStudentById(int studentId);
+    public Student getStudentById(String studentId);
 }

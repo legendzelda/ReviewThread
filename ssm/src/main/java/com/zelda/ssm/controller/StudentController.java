@@ -60,7 +60,7 @@ public class StudentController {
     Student getStudentInJson(@PathVariable String id, Map<String, Object> model) {
         int studentId = Integer.parseInt(id);
         System.out.println("getStudentInJson studentId:" + studentId);
-        Student student = this.studentService.getStudentById(studentId);
+        Student student = this.studentService.getStudentById(studentId+"");
         logger.info(student.toString());
         return student;
     }
@@ -70,7 +70,7 @@ public class StudentController {
                                                      Map<String, Object> model) {
         int studentId = Integer.parseInt(id);
         System.out.println("getStudentInJson2 studentId:" + studentId);
-        Student student = this.studentService.getStudentById(studentId);
+        Student student = this.studentService.getStudentById(studentId+"");
         logger.info(student.toString());
         return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
