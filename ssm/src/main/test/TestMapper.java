@@ -102,16 +102,13 @@ public class TestMapper {
         
     }
     
-    /**
-     * 测试存储过程
-     */
     @Test
     @Transactional
     @Rollback
     public void testRedis() {
         //redisTemplate.opsForValue().set("key","value123");
         //System.out.println(redisTemplate.opsForValue().get("key"));
-        Student student  = studentService.getStudentById(1);
+        Student student  = studentService.getStudentById("3");
         System.out.println(student);
     }
 }
