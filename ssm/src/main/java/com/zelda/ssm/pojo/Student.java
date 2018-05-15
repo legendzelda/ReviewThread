@@ -1,13 +1,14 @@
 package com.zelda.ssm.pojo;
 
-import com.zelda.ssm.controller.StudentController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
 
 /**
  * @author bu.han
  */
-public class Student {
+public class Student implements Serializable{
 
     private static Logger logger = LoggerFactory.getLogger(Student.class);
 
@@ -60,10 +61,15 @@ public class Student {
     public void setGender(int gender) {
         this.gender = gender;
     }
-
+    
     @Override
     public String toString() {
-        logger.info("world");
-        return "id: " + id + ", name: " + name;
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", gender=" + gender +
+                '}';
     }
 }

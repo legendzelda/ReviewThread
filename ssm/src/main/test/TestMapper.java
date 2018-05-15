@@ -1,13 +1,19 @@
 import com.zelda.ssm.controller.StudentController;
 import com.zelda.ssm.dao.IDeptDao;
 import com.zelda.ssm.dao.IStudentDao;
+import com.zelda.ssm.dao.IUserDao;
 import com.zelda.ssm.pojo.Dept;
 import com.zelda.ssm.pojo.Emp;
 import com.zelda.ssm.pojo.Student;
+import com.zelda.ssm.pojo.User;
 import com.zelda.ssm.service.IEmpService;
+import com.zelda.ssm.service.IStudentService;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -37,7 +43,17 @@ public class TestMapper {
 
     @Resource
     private IDeptDao deptDao;
-
+    
+    @Resource
+    private IUserDao userDao;
+    
+    @Autowired
+    @Qualifier("studentService")
+    private IStudentService studentService;
+    
+    @Autowired
+    @Qualifier("redisTemplate")
+    public RedisTemplate redisTemplate;
 
     @Test
     public void  test1() {
@@ -68,6 +84,34 @@ public class TestMapper {
     @Rollback
     public  void testDept() {
        List<Dept> map  =  deptDao.getDeptById(20);
-        System.out.println(map);
+       System.out.println(map);
+    }
+    
+    /**
+     * 测试存储过程
+     */
+    @Test
+    @Transactional
+    @Rollback
+    public void testCallable() {
+        Map params = new HashMap();
+        params.put("sexid",1);
+        params.put("usercount",0);
+        userDao.getUserCount(params);
+        System.out.println("执行存储过程:"+params.get("usercount"));
+        
+    }
+    
+    /**
+     * 测试存储过程
+     */
+    @Test
+    @Transactional
+    @Rollback
+    public void testRedis() {
+        //redisTemplate.opsForValue().set("key","value123");
+        //System.out.println(redisTemplate.opsForValue().get("key"));
+        Student student  = studentService.getStudentById(1);
+        System.out.println(student);
     }
 }

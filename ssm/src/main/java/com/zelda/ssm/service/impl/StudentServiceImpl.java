@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import com.zelda.ssm.dao.IStudentDao;
 import com.zelda.ssm.pojo.Student;
 import com.zelda.ssm.service.IStudentService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -15,6 +16,7 @@ public class StudentServiceImpl implements IStudentService {
     private IStudentDao studentDao;
 
     @Override
+    //@Cacheable(value = "add", key = "#userid")
     public Student getStudentById(int studentId) {
         return this.studentDao.selectByPrimaryKey(studentId);
     }
