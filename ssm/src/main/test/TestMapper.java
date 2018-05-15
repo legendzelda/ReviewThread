@@ -1,5 +1,6 @@
 import com.zelda.ssm.controller.StudentController;
 import com.zelda.ssm.dao.IDeptDao;
+import com.zelda.ssm.dao.IEmpDao;
 import com.zelda.ssm.dao.IStudentDao;
 import com.zelda.ssm.dao.IUserDao;
 import com.zelda.ssm.pojo.Dept;
@@ -46,6 +47,9 @@ public class TestMapper {
     
     @Resource
     private IUserDao userDao;
+
+    @Resource
+    private IEmpDao empDao;
     
     @Autowired
     @Qualifier("studentService")
@@ -110,5 +114,8 @@ public class TestMapper {
         //System.out.println(redisTemplate.opsForValue().get("key"));
         Student student  = studentService.getStudentById("3");
         System.out.println(student);
+        String like = "%rn%";
+        Emp emp = empDao.getEmpLike(like);
+        System.out.println(emp);
     }
 }

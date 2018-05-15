@@ -14,4 +14,6 @@ public interface IEmpDao {
     Student queryEmpForStu();
 
     Emp queryAssociationForEmp(int empId);
+
+    Emp getEmpLike(String alia);
 }

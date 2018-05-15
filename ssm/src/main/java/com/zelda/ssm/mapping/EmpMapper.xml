@@ -66,4 +66,10 @@
     </resultMap>
 
 
+    <!--模糊查询-->
+    <!--不用别名就用resultMap-->
+    <select id="getEmpLike" resultType="com.zelda.ssm.pojo.Emp">
+        SELECT empno empNo,ename empName,job job FROM emp WHERE ename like #{value}
+    </select>
+
 </mapper>

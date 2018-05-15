@@ -47,6 +47,17 @@ public class Emp {
      */
     private Dept dept;
 
-
-        
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empNo=" + empNo +
+                ", empName='" + empName + '\'' +
+                ", job='" + job + '\'' +
+                ", managerInfo=" + managerInfo +
+                ", hiredate=" + hiredate +
+                ", salary=" + salary +
+                ", commission=" + commission +
+                ", dept=" + dept +
+                '}';
+    }
 }
