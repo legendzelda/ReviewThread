@@ -118,4 +118,16 @@ public class TestMapper {
         Emp emp = empDao.getEmpLike(like);
         System.out.println(emp);
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testMaxSalEveryDept() {
+        List<Emp> empList = empDao.maxSalEveryDept2();
+        System.out.println(empList);
+        List<Map> hashMap= empDao.avgSalLevelPerDept();
+        System.out.println(hashMap);
+
+    }
+
 }

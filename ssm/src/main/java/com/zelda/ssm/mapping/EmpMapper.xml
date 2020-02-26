@@ -72,4 +72,38 @@
         SELECT empno empNo,ename empName,job job FROM emp WHERE ename like #{value}
     </select>
 
+    <!--
+    分组,每个部门中工资最高的人的姓名,薪水和部门编号
+    返回List<Object> 类型数据
+    -->
+    <select id="maxSalEveryDept" resultMap="everyDeptResultMap">
+        SELECT  e.ename ,e.sal,e.deptno FROM  emp e   JOIN (SELECT  max(sal) as maxsal,deptno FROM emp GROUP BY deptno)m ON e.sal = m.maxsal and e.deptno = m.deptno
+    </select>
+
+    <resultMap id="everyDeptResultMap"  type="com.zelda.ssm.pojo.Emp">
+            <result column="ename" property="empName"></result>
+            <result column="sal" property="salary"></result>
+            <association property="dept" resultMap="assDeptMap"></association>
+    </resultMap>
+
+    <resultMap id="assDeptMap" type="com.zelda.ssm.pojo.Dept">
+            <id column="deptno" property="deptNo"></id>
+    </resultMap>
+
+    <!--
+        resultType的形式 返回 List<Object>
+    -->
+    <select id="maxSalEveryDept2" resultType="com.zelda.ssm.pojo.Emp">
+        SELECT  e.ename AS  empName,e.sal AS salary,e.deptno FROM  emp e   JOIN (SELECT  max(sal) as maxsal,deptno FROM emp GROUP BY deptno)m ON e.sal = m.maxsal and e.deptno = m.deptno
+    </select>
+
+    <select id="avgSalLevelPerDept" resultMap="levelMap">
+        SELECT  sa.grade ,s.deptno,s.avgSal FROM (SELECT  deptno, avg(sal) avgSal FROM emp GROUP BY deptno)s  LEFT JOIN salgrade sa ON s.avgSal BETWEEN  sa.losal AND  sa.hisal
+    </select>
+
+    <resultMap id="levelMap" type="hashmap">
+            <result property="grade" column="grade"></result>
+            <result property="deptno" column="deptno"></result>
+            <result property="avgSal" column="avgSal"></result>
+    </resultMap>
 </mapper>

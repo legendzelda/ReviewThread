@@ -208,6 +208,7 @@ public class RedisCacheUtil<T> {
                                                              * hashOperation
                                                              */) {
 		Map<Integer, T> map = redisTemplate.opsForHash().entries(key);
+
         /* Map<String, T> map = hashOperation.entries(key); */
 		return map;
 	}
