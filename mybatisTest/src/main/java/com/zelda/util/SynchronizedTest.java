@@ -1,4 +1,4 @@
-package com.zelda.sychronized;
+package com.zelda.util;
 
 /**
  * @author bu.han
@@ -19,7 +19,6 @@ package com.zelda.sychronized;
 
     static class Runner implements Runnable {
 
-        @Override
         public  void run() {
             while (num > 0) {
                 try {
